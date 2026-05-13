@@ -136,6 +136,13 @@ export const PEOPLE_QUERY = groq`
   }
 `;
 
+export const PERSON_QUERY = groq`
+  *[_type == "person" && slug.current == $slug][0] {
+    _id, name, slug, role, bio, trajectory, photo, socialLinks, memberGroup,
+    seo
+  }
+`;
+
 export const ALL_SLUGS_QUERY = groq`
   {
     "products": *[_type == "product"] { "slug": slug.current, _updatedAt },

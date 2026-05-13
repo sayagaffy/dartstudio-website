@@ -34,7 +34,7 @@ type PersonDetail = {
   slug: { current: string };
   role: LocalizedField;
   bio: LocalizedField | null;
-  trajectory: unknown;
+  trajectory: { id: unknown; en: unknown } | null;
   photo: SanityImage | null;
   socialLinks: SocialLinks | null;
   memberGroup?: "protagonist" | "circle";
@@ -227,7 +227,11 @@ export default async function PersonPage({ params }: Props) {
             <div className="max-w-prose">
               <p className="label-mono mb-8">{locale === "en" ? "Background" : "Jejak Kerja"}</p>
               <div className="prose-dartstudio">
-                <PortableText value={person.trajectory as unknown[]} />
+                <PortableText
+                  value={
+                    (locale === "en" ? person.trajectory.en : person.trajectory.id) as unknown[]
+                  }
+                />
               </div>
             </div>
           </Container>

@@ -171,6 +171,19 @@
   }
 }
 
+/* ---- Logo theme switching ---- */
+
+.logo-on-light { display: block; }
+.logo-on-dark  { display: none;  }
+
+[data-theme="dark"] .logo-on-light { display: none;  }
+[data-theme="dark"] .logo-on-dark  { display: block; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo-on-light { display: none;  }
+  :root:not([data-theme="light"]) .logo-on-dark  { display: block; }
+}
+
 /* ---- Base styles ---- */
 
 @layer base {

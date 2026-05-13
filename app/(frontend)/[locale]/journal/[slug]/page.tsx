@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import type { Image as SanityImage } from "sanity";
@@ -11,6 +10,7 @@ import { Schema } from "@/components/seo/Schema";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Prose } from "@/components/ui/Prose";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { Section } from "@/components/ui/Section";
 import { env } from "@/lib/env";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
@@ -190,7 +190,7 @@ export default async function JournalPostPage({ params }: Props) {
 
             {post.heroImage?.asset && (
               <div className="my-12 aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
-                <Image
+                <Img
                   src={urlForImage(post.heroImage).width(1600).height(900).url()}
                   alt=""
                   width={1600}
@@ -212,7 +212,7 @@ export default async function JournalPostPage({ params }: Props) {
                 <p className="label-mono mb-3">About the Author</p>
                 <div className="flex items-start gap-4">
                   {post.author.photo?.asset && (
-                    <Image
+                    <Img
                       src={urlForImage(post.author.photo).width(120).height(120).url()}
                       alt={post.author.name}
                       width={60}

@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import type { Image as SanityImage } from "sanity";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import type { LocalizedField } from "@/lib/i18n/localize";
 import { localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
@@ -37,7 +37,7 @@ function PersonCard({ person, locale }: { person: TeamPerson; locale: Locale }) 
       >
         <div className="aspect-square overflow-hidden bg-[var(--color-bg-raised)]">
           {person.photo?.asset ? (
-            <Image
+            <Img
               src={urlForImage(person.photo).width(600).height(600).url()}
               alt={person.name}
               width={600}
@@ -78,33 +78,32 @@ export function TeamTabs({ protagonistLabel, circleLabel, protagonists, circle, 
   return (
     <>
       {/* Tab nav */}
-      <nav className="flex items-center gap-4 mb-10" aria-label="Team groups">
+      <nav
+        className="flex items-center gap-6 mb-10 border-b border-[var(--color-border)]"
+        aria-label="Team groups"
+      >
         <button
           type="button"
           onClick={() => setActiveTab("protagonist")}
           className={[
-            "label-mono transition-colors",
+            "label-mono pb-3 -mb-px transition-colors border-b-2",
             activeTab === "protagonist"
-              ? "text-[var(--color-fg)]"
-              : "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
+              ? "text-[var(--color-fg)] border-[var(--color-accent)]"
+              : "text-[var(--color-fg-muted)] border-transparent hover:text-[var(--color-fg)] hover:border-[var(--color-border)]",
           ].join(" ")}
           aria-current={activeTab === "protagonist" ? "true" : undefined}
         >
           {protagonistLabel}
         </button>
 
-        <span className="text-[var(--color-fg-muted)] select-none" aria-hidden="true">
-          |
-        </span>
-
         <button
           type="button"
           onClick={() => setActiveTab("circle")}
           className={[
-            "label-mono transition-colors",
+            "label-mono pb-3 -mb-px transition-colors border-b-2",
             activeTab === "circle"
-              ? "text-[var(--color-fg)]"
-              : "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
+              ? "text-[var(--color-fg)] border-[var(--color-accent)]"
+              : "text-[var(--color-fg-muted)] border-transparent hover:text-[var(--color-fg)] hover:border-[var(--color-border)]",
           ].join(" ")}
           aria-current={activeTab === "circle" ? "true" : undefined}
         >

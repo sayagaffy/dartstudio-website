@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import type { Image as SanityImage } from "sanity";
@@ -8,6 +7,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Schema } from "@/components/seo/Schema";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { Section } from "@/components/ui/Section";
 import type { LocalizedField } from "@/lib/i18n/localize";
 import { localize } from "@/lib/i18n/localize";
@@ -138,7 +138,7 @@ export default async function PersonPage({ params }: Props) {
             {/* Photo */}
             <div className="aspect-square overflow-hidden bg-[var(--color-bg-raised)] max-w-sm">
               {person.photo?.asset ? (
-                <Image
+                <Img
                   src={urlForImage(person.photo).width(800).height(800).url()}
                   alt={person.name}
                   width={800}

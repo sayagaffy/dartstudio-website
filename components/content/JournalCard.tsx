@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Image as SanityImage } from "sanity";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
@@ -52,7 +52,7 @@ export function JournalCard({ post, locale, featured = false }: Props) {
       )}
       {featured && post.heroImage?.asset && (
         <div className="mt-6 aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
-          <Image
+          <Img
             src={urlForImage(post.heroImage).width(1200).height(675).url()}
             alt=""
             width={1200}

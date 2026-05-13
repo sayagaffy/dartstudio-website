@@ -1,8 +1,8 @@
-import Image from "next/image";
 import type { Image as SanityImage } from "sanity";
 import { PortableText } from "@/components/content/PortableText";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
@@ -55,7 +55,7 @@ export function ProductCapabilities({ heading, intro, capabilities, locale }: Pr
                 </div>
                 {capability.image?.asset && (
                   <div className="aspect-[4/3] overflow-hidden bg-[var(--color-bg-raised)]">
-                    <Image
+                    <Img
                       src={urlForImage(capability.image).width(800).height(600).url()}
                       alt={capHeading ?? ""}
                       width={800}

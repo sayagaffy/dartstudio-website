@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import type { Image as SanityImage } from "sanity";
@@ -14,6 +13,7 @@ import { Schema } from "@/components/seo/Schema";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
@@ -202,7 +202,7 @@ export default async function ProductDetailPage({ params }: Props) {
         <Section spacing="sm">
           <Container size="page">
             <div className="aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
-              <Image
+              <Img
                 src={urlForImage(product.heroImage).width(1600).height(900).url()}
                 alt={product.name}
                 width={1600}

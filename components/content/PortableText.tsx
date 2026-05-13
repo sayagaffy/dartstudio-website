@@ -1,7 +1,7 @@
 import { PortableText as PortableTextBase, type PortableTextComponents } from "@portabletext/react";
-import Image from "next/image";
 import Link from "next/link";
 import type { Image as SanityImage } from "sanity";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { urlForImage } from "@/sanity/lib/image";
 
 const components: PortableTextComponents = {
@@ -84,7 +84,7 @@ const components: PortableTextComponents = {
       const url = urlForImage(value).width(1200).url();
       return (
         <figure className="my-8">
-          <Image
+          <Img
             src={url}
             alt={value.alt ?? ""}
             width={1200}

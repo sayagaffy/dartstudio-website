@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Image as SanityImage } from "sanity";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
@@ -38,7 +38,7 @@ export function ProductCard({ product, locale, featured = false }: Props) {
     >
       {product.heroImage?.asset && (
         <div className="mb-6 aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
-          <Image
+          <Img
             src={urlForImage(product.heroImage).width(800).height(450).url()}
             alt={product.name}
             width={800}

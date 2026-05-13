@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Image as SanityImage } from "sanity";
+import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { formatDate, readingTime } from "@/lib/utils";
@@ -20,7 +20,7 @@ export function AuthorByline({ author, publishedAt, bodyText, locale }: Props) {
   return (
     <div className="flex items-center gap-4">
       {author.photo?.asset && (
-        <Image
+        <Img
           src={urlForImage(author.photo).width(96).height(96).url()}
           alt={author.name}
           width={48}

@@ -30,6 +30,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale}>
       <head>
+        {/* Favicon — black for light mode, white for dark mode */}
+        <link rel="icon" href="/ds-black.ico" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/ds-white.ico" media="(prefers-color-scheme: dark)" />
         <link
           rel="preload"
           href="/fonts/charter/Charter-Bold.otf"

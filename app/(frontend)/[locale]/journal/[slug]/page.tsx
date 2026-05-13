@@ -7,14 +7,17 @@ import { AuthorByline } from "@/components/content/AuthorByline";
 import { PortableText } from "@/components/content/PortableText";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { RelatedPosts } from "@/components/sections/RelatedPosts";
+import { Schema } from "@/components/seo/Schema";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Prose } from "@/components/ui/Prose";
 import { Section } from "@/components/ui/Section";
+import { env } from "@/lib/env";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { buildArticleSchema, buildBreadcrumbSchema } from "@/lib/seo/schema";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
 import { JOURNAL_POST_QUERY, JOURNAL_POSTS_QUERY } from "@/sanity/lib/queries";
@@ -117,8 +120,34 @@ export default async function JournalPostPage({ params }: Props) {
   const body = locale === "en" ? post.body.en : post.body.id;
   const bodyText = extractText(body);
 
+  const articleSchema = buildArticleSchema({
+    title: localize(post.title, locale) ?? "",
+    description: localize(post.excerpt, locale) ?? "",
+    slug,
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt,
+    author: {
+      name: post.author?.name ?? "Dartstudio",
+      url: post.author?.slug?.current
+        ? `${env.NEXT_PUBLIC_SITE_URL}${locale === "id" ? "" : "/en"}/studio/people/${post.author.slug.current}`
+        : undefined,
+    },
+    category: post.category ? (localize(post.category.title, locale) ?? undefined) : undefined,
+    image: post.heroImage?.asset
+      ? urlForImage(post.heroImage).width(1200).height(630).url()
+      : `${env.NEXT_PUBLIC_SITE_URL}/api/og?title=${encodeURIComponent(localize(post.title, locale) ?? "")}&locale=${locale}`,
+    locale,
+  });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { label: "Home", href: "/" },
+    { label: "Journal", href: "/journal" },
+    { label: localize(post.title, locale) ?? "" },
+  ]);
+
   return (
     <>
+      <Schema data={[articleSchema, breadcrumbSchema]} />
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },

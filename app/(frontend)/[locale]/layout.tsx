@@ -3,7 +3,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { Schema } from "@/components/seo/Schema";
 import { routing } from "@/lib/i18n/routing";
+import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/seo/schema";
 import "@/app/globals.css";
 
 export function generateStaticParams() {
@@ -43,6 +45,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
       </head>
       <body className="min-h-screen flex flex-col">
+        <Schema data={[buildOrganizationSchema(), buildWebsiteSchema()]} />
         <NextIntlClientProvider>
           <Header />
           <main className="flex-1">{children}</main>

@@ -143,6 +143,7 @@ export const ALL_SLUGS_QUERY = groq`
       "slug": slug.current, "slugEn": slugEn.current, _updatedAt, publishedAt
     },
     "journalCategories": *[_type == "journalCategory"] { "slug": slug.current, _updatedAt },
+    "collaborateModels": *[_type == "collaborateModel"] { "modelKey": modelKey, _updatedAt },
     "people": *[_type == "person"] { "slug": slug.current, _updatedAt }
   }
 `;

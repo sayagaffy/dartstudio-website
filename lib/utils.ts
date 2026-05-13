@@ -20,3 +20,22 @@ export function absoluteUrl(path: string, baseUrl?: string): string {
   const base = baseUrl ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://dartstudio.id";
   return `${base.replace(/\/$/, "")}${path.startsWith("/") ? path : `/${path}`}`;
 }
+
+/**
+ * Extracts plain text from Portable Text blocks. Used for SEO descriptions
+ * and FAQ answers in JSON-LD where rich formatting isn't supported.
+ */
+export function extractPlainText(blocks: unknown): string {
+  if (!Array.isArray(blocks)) return "";
+  return blocks
+    .filter(
+      (b): b is { _type: string; children?: Array<{ text?: string }> } =>
+        typeof b === "object" &&
+        b !== null &&
+        "_type" in b &&
+        (b as { _type: string })._type === "block",
+    )
+    .map((b) => (b.children ?? []).map((c) => c.text ?? "").join(" "))
+    .join(" ")
+    .trim();
+}

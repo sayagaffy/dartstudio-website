@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { FAQ, type FAQItem } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
+import { Schema } from "@/components/seo/Schema";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Prose } from "@/components/ui/Prose";
@@ -13,6 +14,8 @@ import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { buildBreadcrumbSchema, buildFAQPageSchema } from "@/lib/seo/schema";
+import { extractPlainText } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { COLLABORATE_MODEL_QUERY, COLLABORATE_MODELS_QUERY } from "@/sanity/lib/queries";
 
@@ -85,6 +88,22 @@ export default async function CollaborateModelPage({ params }: Props) {
 
   if (!data) notFound();
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { label: "Home", href: "/" },
+    { label: "Collaborate", href: "/collaborate" },
+    { label: localize(data.name, locale) ?? "" },
+  ]);
+
+  const faqSchema =
+    data.faqs && data.faqs.length > 0
+      ? buildFAQPageSchema(
+          data.faqs.map((faq) => ({
+            question: localize(faq.question, locale) ?? "",
+            answer: extractPlainText(locale === "en" ? faq.answer.en : faq.answer.id),
+          })),
+        )
+      : null;
+
   const ctaPrimary = data.ctaPrimary
     ? { label: localize(data.ctaPrimary.label, locale) ?? "", href: data.ctaPrimary.href }
     : null;
@@ -94,6 +113,7 @@ export default async function CollaborateModelPage({ params }: Props) {
 
   return (
     <>
+      <Schema data={[breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])]} />
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },

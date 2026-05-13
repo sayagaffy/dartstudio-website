@@ -10,6 +10,7 @@ import { FAQ, type FAQItem } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { ProductCapabilities } from "@/components/sections/ProductCapabilities";
 import { ProductProblemApproach } from "@/components/sections/ProductProblemApproach";
+import { Schema } from "@/components/seo/Schema";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
@@ -17,6 +18,8 @@ import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { buildBreadcrumbSchema, buildFAQPageSchema, buildProductSchema } from "@/lib/seo/schema";
+import { extractPlainText } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
 import { PRODUCT_QUERY, PRODUCTS_QUERY } from "@/sanity/lib/queries";
@@ -117,8 +120,36 @@ export default async function ProductDetailPage({ params }: Props) {
   });
   if (!product) notFound();
 
+  const productSchema = buildProductSchema({
+    name: product.name,
+    description: localize(product.tagline, locale) ?? "",
+    slug,
+    status: product.status,
+    image: product.heroImage?.asset
+      ? urlForImage(product.heroImage).width(1200).height(630).url()
+      : undefined,
+    locale,
+  });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: product.name },
+  ]);
+
+  const faqSchema =
+    product.faqs && product.faqs.length > 0
+      ? buildFAQPageSchema(
+          product.faqs.map((faq) => ({
+            question: localize(faq.question, locale) ?? "",
+            answer: extractPlainText(locale === "en" ? faq.answer.en : faq.answer.id),
+          })),
+        )
+      : null;
+
   return (
     <>
+      <Schema data={[productSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])]} />
       <Breadcrumb
         items={[
           { label: "Home", href: "/" },

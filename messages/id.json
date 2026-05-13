@@ -8,7 +8,9 @@
     "collaborate": "Collaborate",
     "products": "Products",
     "journal": "Journal",
-    "contact": "Mulai Percakapan"
+    "contact": "Mulai Percakapan",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu"
   },
   "home": {
     "placeholder": "Selamat datang. Sedang dibangun."

@@ -8,7 +8,9 @@
     "collaborate": "Collaborate",
     "products": "Products",
     "journal": "Journal",
-    "contact": "Start a Conversation"
+    "contact": "Start a Conversation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "home": {
     "placeholder": "Welcome. Under construction."

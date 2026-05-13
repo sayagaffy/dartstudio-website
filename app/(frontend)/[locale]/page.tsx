@@ -1,8 +1,10 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { Heading } from "@/components/ui/Heading";
+import { Section } from "@/components/ui/Section";
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
+type Props = { params: Promise<{ locale: string }> };
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
@@ -12,17 +14,24 @@ export default async function HomePage({ params }: Props) {
   const tCommon = await getTranslations("common");
 
   return (
-    <main className="min-h-screen p-8">
-      <div className="mx-auto max-w-3xl">
-        <p className="font-mono text-sm uppercase tracking-wider text-[var(--color-ink-400)]">
-          {locale}
+    <Section spacing="lg">
+      <Container size="page">
+        <p className="label-mono text-[var(--color-accent)]">— {tCommon("siteName")}</p>
+        <Heading level={1} size="display" className="mt-6 max-w-3xl">
+          {tCommon("tagline")}
+        </Heading>
+        <p className="mt-6 text-[length:var(--text-lead)] text-[var(--color-fg-muted)] font-serif max-w-2xl leading-[1.55]">
+          {t("placeholder")}
         </p>
-        <h1 className="mt-4 text-5xl font-bold text-[var(--color-ink-900)]">
-          {tCommon("siteName")}
-        </h1>
-        <p className="mt-4 text-2xl text-[var(--color-ink-700)]">{tCommon("tagline")}</p>
-        <p className="mt-12 text-base text-[var(--color-ink-500)]">{t("placeholder")}</p>
-      </div>
-    </main>
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Button href="/collaborate" variant="primary">
+            {locale === "id" ? "Mulai Percakapan" : "Start a Conversation"}
+          </Button>
+          <Button href="/journal" variant="secondary">
+            {locale === "id" ? "Baca Journal" : "Read the Journal"}
+          </Button>
+        </div>
+      </Container>
+    </Section>
   );
 }

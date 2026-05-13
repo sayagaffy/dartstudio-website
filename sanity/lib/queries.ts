@@ -132,7 +132,7 @@ export const JOURNAL_CATEGORIES_QUERY = groq`
 
 export const PEOPLE_QUERY = groq`
   *[_type == "person"] | order(displayOrder asc) {
-    _id, name, slug, role, bio, photo, socialLinks
+    _id, name, slug, role, bio, photo, socialLinks, memberGroup
   }
 `;
 

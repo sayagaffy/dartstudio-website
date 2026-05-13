@@ -34,7 +34,7 @@
       },
       "alternative": {
         "heading": "Lebih suka langsung email?",
-        "body": "Kirim ke hello@dartstudio.id. Subjek email yang membantu: nama company + model kolaborasi yang dituju."
+        "body": "Kirim ke dartstudio.team@gmail.com. Subjek email yang membantu: nama company + model kolaborasi yang dituju."
       },
       "responseTime": {
         "heading": "Apa yang terjadi setelah Anda kirim.",
@@ -101,7 +101,7 @@
         "body": "Orang asli di Dartstudio akan baca dalam 2-3 hari kerja. Email konfirmasi sudah dikirim ke alamat Anda."
       },
       "errors": {
-        "generic": "Ada error saat mengirim. Coba lagi, atau email langsung ke hello@dartstudio.id.",
+        "generic": "Ada error saat mengirim. Coba lagi, atau email langsung ke dartstudio.team@gmail.com.",
         "network": "Tidak bisa terhubung. Cek koneksi Anda dan coba lagi.",
         "rateLimited": "Terlalu banyak pengiriman. Coba lagi dalam beberapa menit."
       }

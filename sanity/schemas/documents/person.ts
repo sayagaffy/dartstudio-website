@@ -49,6 +49,20 @@ export const person = defineType({
       type: "socialLinks",
     }),
     defineField({
+      name: "memberGroup",
+      title: "Member Group",
+      type: "string",
+      options: {
+        list: [
+          { title: "Pegiat (Protagonist) — tim inti", value: "protagonist" },
+          { title: "Anggota Perkumpulan (Circle) — komunitas luas", value: "circle" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "protagonist",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "displayOrder",
       title: "Display Order",
       type: "number",

@@ -33,6 +33,7 @@ type Person = {
   role: LocalizedField;
   bio: LocalizedField | null;
   photo: SanityImage | null;
+  memberGroup?: "protagonist" | "circle";
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -118,6 +119,8 @@ export default async function StudioPage({ params }: Props) {
         }
         people={people}
         locale={locale}
+        protagonistLabel={locale === "en" ? "Protagonist" : "Pegiat"}
+        circleLabel={locale === "en" ? "Circle" : "Anggota Perkumpulan"}
       />
 
       {howWeWorkSection && (

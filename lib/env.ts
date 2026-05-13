@@ -35,8 +35,8 @@ const envSchema = z.object({
 
   // Resend (Phase 7)
   RESEND_API_KEY: opt(z.string().min(1)),
-  CONTACT_TO_EMAIL: z.string().email().default("hello@dartstudio.id"),
-  CONTACT_FROM_EMAIL: z.string().email().default("noreply@dartstudio.id"),
+  CONTACT_TO_EMAIL: z.string().email().default("dartstudio.team@gmail.com"),
+  CONTACT_FROM_EMAIL: z.string().email().default("dartstudio.team@gmail.com"),
 
   // Upstash Redis — rate limiting (Phase 7)
   UPSTASH_REDIS_REST_URL: opt(z.string().url()),

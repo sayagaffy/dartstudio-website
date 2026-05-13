@@ -61,7 +61,7 @@ export function ProductCard({ product, locale, featured = false }: Props) {
         {localize(product.tagline, locale)}
       </p>
       <p className="mt-auto pt-6 font-mono text-xs uppercase tracking-wider text-[var(--color-fg-muted)] group-hover:text-[var(--color-accent)] transition-colors">
-        Pelajari →
+        {locale === "en" ? "Learn more →" : "Pelajari →"}
       </p>
     </Link>
   );

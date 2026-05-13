@@ -64,7 +64,7 @@ export function JournalCard({ post, locale, featured = false }: Props) {
         {localize(post.excerpt, locale)}
       </p>
       <p className="mt-4 font-mono text-xs uppercase tracking-wider text-[var(--color-fg-muted)] group-hover:text-[var(--color-accent)] transition-colors">
-        Read →
+        {locale === "en" ? "Read →" : "Baca →"}
       </p>
     </Link>
   );

@@ -52,6 +52,7 @@ export const person = defineType({
       name: "memberGroup",
       title: "Member Group",
       type: "string",
+      description: "Kosongkan = otomatis masuk Pegiat (Protagonist).",
       options: {
         list: [
           { title: "Pegiat (Protagonist) — tim inti", value: "protagonist" },
@@ -60,7 +61,6 @@ export const person = defineType({
         layout: "radio",
       },
       initialValue: "protagonist",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "displayOrder",

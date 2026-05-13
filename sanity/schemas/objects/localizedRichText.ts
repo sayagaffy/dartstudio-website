@@ -34,18 +34,7 @@ const portableTextBlocks = [
     ],
   },
   {
-    type: "image",
-    options: { hotspot: true },
-    fields: [
-      {
-        name: "alt",
-        type: "string",
-        title: "Alt text",
-        // biome-ignore lint/suspicious/noExplicitAny: sanity rule type
-        validation: (rule: any) => rule.required(),
-      },
-      { name: "caption", type: "localizedString", title: "Caption" },
-    ],
+    type: "r2Image",
   },
   {
     type: "object",

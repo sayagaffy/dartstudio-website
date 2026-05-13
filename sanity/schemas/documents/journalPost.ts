@@ -61,9 +61,7 @@ export const journalPost = defineType({
     defineField({
       name: "heroImage",
       title: "Hero Image",
-      type: "image",
-      options: { hotspot: true },
-      fields: [{ name: "alt", type: "string", title: "Alt text" }],
+      type: "r2Image",
     }),
     defineField({
       name: "publishedAt",

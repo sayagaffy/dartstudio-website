@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import type { Image as SanityImage } from "sanity";
 import { WaitlistForm } from "@/components/forms/WaitlistForm";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { BehindTheBuild } from "@/components/sections/BehindTheBuild";
@@ -19,9 +18,9 @@ import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema, buildFAQPageSchema, buildProductSchema } from "@/lib/seo/schema";
+import type { R2Image } from "@/lib/types/r2Image";
 import { extractPlainText } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlForImage } from "@/sanity/lib/image";
 import { PRODUCT_QUERY, PRODUCTS_QUERY } from "@/sanity/lib/queries";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
@@ -32,7 +31,7 @@ type Product = {
   slug: { current: string };
   tagline: LocalizedField | null;
   status: "live" | "beta" | "coming-soon" | "sunset";
-  heroImage: SanityImage | null;
+  heroImage: R2Image;
   problemHeading: LocalizedField | null;
   problemBody: { id: unknown; en: unknown } | null;
   approachHeading: LocalizedField | null;
@@ -40,7 +39,7 @@ type Product = {
   capabilities: Array<{
     heading: LocalizedField;
     body: { id: unknown; en: unknown };
-    image?: SanityImage | null;
+    image?: R2Image;
   }> | null;
   relatedJournalPosts: Array<{
     _id: string;
@@ -125,9 +124,7 @@ export default async function ProductDetailPage({ params }: Props) {
     description: localize(product.tagline, locale) ?? "",
     slug,
     status: product.status,
-    image: product.heroImage?.asset
-      ? urlForImage(product.heroImage).width(1200).height(630).url()
-      : undefined,
+    image: product.heroImage?.url,
     locale,
   });
 
@@ -198,12 +195,12 @@ export default async function ProductDetailPage({ params }: Props) {
         </Container>
       </Section>
 
-      {product.heroImage?.asset && (
+      {product.heroImage?.url && (
         <Section spacing="sm">
           <Container size="page">
             <div className="aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
               <Img
-                src={urlForImage(product.heroImage).width(1600).height(900).url()}
+                src={product.heroImage.url}
                 alt={product.name}
                 width={1600}
                 height={900}

@@ -25,13 +25,12 @@ export const siteSettings = defineType({
     defineField({
       name: "logo",
       title: "Logo",
-      type: "image",
-      options: { hotspot: false },
+      type: "r2Image",
     }),
     defineField({
       name: "logoLight",
       title: "Logo (light mode variant)",
-      type: "image",
+      type: "r2Image",
       description: "For dark backgrounds.",
     }),
     defineField({

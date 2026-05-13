@@ -1,4 +1,3 @@
-import type { Image as SanityImage } from "sanity";
 import { PortableText } from "@/components/content/PortableText";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
@@ -6,12 +5,12 @@ import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
-import { urlForImage } from "@/sanity/lib/image";
+import type { R2Image } from "@/lib/types/r2Image";
 
 type Capability = {
   heading: LocalizedField;
   body: { id: unknown; en: unknown };
-  image?: SanityImage | null;
+  image?: R2Image;
 };
 
 type Props = {
@@ -53,10 +52,10 @@ export function ProductCapabilities({ heading, intro, capabilities, locale }: Pr
                     <PortableText value={(capBody as unknown[]) ?? []} />
                   </div>
                 </div>
-                {capability.image?.asset && (
+                {capability.image?.url && (
                   <div className="aspect-[4/3] overflow-hidden bg-[var(--color-bg-raised)]">
                     <Img
-                      src={urlForImage(capability.image).width(800).height(600).url()}
+                      src={capability.image.url}
                       alt={capHeading ?? ""}
                       width={800}
                       height={600}

@@ -28,8 +28,7 @@ export const seoMetadata = defineType({
     defineField({
       name: "ogImage",
       title: "OG Image Override",
-      type: "image",
-      options: { hotspot: true },
+      type: "r2Image",
       description: "If empty, dynamic OG image generated from title.",
     }),
     defineField({

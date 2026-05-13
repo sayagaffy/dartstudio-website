@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import type { Image as SanityImage } from "sanity";
 import { AuthorByline } from "@/components/content/AuthorByline";
 import { PortableText } from "@/components/content/PortableText";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
@@ -18,8 +17,8 @@ import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildArticleSchema, buildBreadcrumbSchema } from "@/lib/seo/schema";
+import type { R2Image } from "@/lib/types/r2Image";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlForImage } from "@/sanity/lib/image";
 import { JOURNAL_POST_QUERY, JOURNAL_POSTS_QUERY } from "@/sanity/lib/queries";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
@@ -32,7 +31,7 @@ type Post = {
   slugEn: { current: string } | null;
   excerpt: LocalizedField;
   body: { id: unknown; en: unknown };
-  heroImage: SanityImage | null;
+  heroImage: R2Image;
   publishedAt: string;
   updatedAt: string | null;
   category: { _id: string; title: LocalizedField; slug: { current: string } } | null;
@@ -40,7 +39,7 @@ type Post = {
     _id: string;
     name: string;
     role: LocalizedField;
-    photo?: SanityImage | null;
+    photo?: R2Image;
     bio?: LocalizedField | null;
     slug: { current: string };
   } | null;
@@ -133,9 +132,9 @@ export default async function JournalPostPage({ params }: Props) {
         : undefined,
     },
     category: post.category ? (localize(post.category.title, locale) ?? undefined) : undefined,
-    image: post.heroImage?.asset
-      ? urlForImage(post.heroImage).width(1200).height(630).url()
-      : `${env.NEXT_PUBLIC_SITE_URL}/api/og?title=${encodeURIComponent(localize(post.title, locale) ?? "")}&locale=${locale}`,
+    image:
+      post.heroImage?.url ??
+      `${env.NEXT_PUBLIC_SITE_URL}/api/og?title=${encodeURIComponent(localize(post.title, locale) ?? "")}&locale=${locale}`,
     locale,
   });
 
@@ -188,10 +187,10 @@ export default async function JournalPostPage({ params }: Props) {
               )}
             </header>
 
-            {post.heroImage?.asset && (
+            {post.heroImage?.url && (
               <div className="my-12 aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
                 <Img
-                  src={urlForImage(post.heroImage).width(1600).height(900).url()}
+                  src={post.heroImage.url}
                   alt=""
                   width={1600}
                   height={900}
@@ -211,9 +210,9 @@ export default async function JournalPostPage({ params }: Props) {
               <footer className="mt-16 pt-8 border-t border-[var(--color-border)]">
                 <p className="label-mono mb-3">About the Author</p>
                 <div className="flex items-start gap-4">
-                  {post.author.photo?.asset && (
+                  {post.author.photo?.url && (
                     <Img
-                      src={urlForImage(post.author.photo).width(120).height(120).url()}
+                      src={post.author.photo.url}
                       alt={post.author.name}
                       width={60}
                       height={60}

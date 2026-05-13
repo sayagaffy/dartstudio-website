@@ -1,10 +1,9 @@
-import type { Image as SanityImage } from "sanity";
 import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
+import type { R2Image } from "@/lib/types/r2Image";
 import { formatDate } from "@/lib/utils";
-import { urlForImage } from "@/sanity/lib/image";
 
 type JournalCardData = {
   _id: string;
@@ -15,8 +14,8 @@ type JournalCardData = {
   excerpt: LocalizedField;
   publishedAt: string;
   category: { _id: string; title: LocalizedField; slug: { current: string } } | null;
-  author: { _id: string; name: string; photo?: SanityImage | null } | null;
-  heroImage?: SanityImage | null;
+  author: { _id: string; name: string; photo?: R2Image } | null;
+  heroImage?: R2Image;
 };
 
 type Props = { post: JournalCardData; locale: Locale; featured?: boolean };
@@ -50,10 +49,10 @@ export function JournalCard({ post, locale, featured = false }: Props) {
           {localize(post.subtitle, locale)}
         </p>
       )}
-      {featured && post.heroImage?.asset && (
+      {featured && post.heroImage?.url && (
         <div className="mt-6 aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
           <Img
-            src={urlForImage(post.heroImage).width(1200).height(675).url()}
+            src={post.heroImage.url}
             alt=""
             width={1200}
             height={675}

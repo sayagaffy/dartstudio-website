@@ -1,9 +1,8 @@
-import type { Image as SanityImage } from "sanity";
 import { SanityImage as Img } from "@/components/ui/SanityImage";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
-import { urlForImage } from "@/sanity/lib/image";
+import type { R2Image } from "@/lib/types/r2Image";
 
 type ProductCardData = {
   _id: string;
@@ -11,7 +10,7 @@ type ProductCardData = {
   slug: { current: string };
   tagline: LocalizedField | null;
   status: "live" | "beta" | "coming-soon" | "sunset";
-  heroImage?: SanityImage | null;
+  heroImage?: R2Image;
 };
 
 type Props = { product: ProductCardData; locale: Locale; featured?: boolean };
@@ -36,10 +35,10 @@ export function ProductCard({ product, locale, featured = false }: Props) {
       href={`/products/${product.slug.current}`}
       className={`group flex flex-col border border-[var(--color-border)] bg-[var(--color-bg)] p-8 transition-colors hover:border-[var(--color-fg)] ${featured ? "md:col-span-2 md:row-span-2" : ""}`}
     >
-      {product.heroImage?.asset && (
+      {product.heroImage?.url && (
         <div className="mb-6 aspect-[16/9] overflow-hidden bg-[var(--color-bg-raised)]">
           <Img
-            src={urlForImage(product.heroImage).width(800).height(450).url()}
+            src={product.heroImage.url}
             alt={product.name}
             width={800}
             height={450}

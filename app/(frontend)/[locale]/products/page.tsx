@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import type { Image as SanityImage } from "sanity";
 import { ProductCard } from "@/components/content/ProductCard";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -10,6 +9,7 @@ import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
+import type { R2Image } from "@/lib/types/r2Image";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PAGE_QUERY, PRODUCTS_QUERY } from "@/sanity/lib/queries";
 
@@ -21,7 +21,7 @@ type Product = {
   slug: { current: string };
   tagline: LocalizedField | null;
   status: "live" | "beta" | "coming-soon" | "sunset";
-  heroImage?: SanityImage | null;
+  heroImage?: R2Image;
 };
 
 type PageData = {

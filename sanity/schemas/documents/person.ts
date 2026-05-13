@@ -39,9 +39,7 @@ export const person = defineType({
     defineField({
       name: "photo",
       title: "Photo",
-      type: "image",
-      options: { hotspot: true },
-      fields: [{ name: "alt", type: "string", title: "Alt text" }],
+      type: "r2Image",
     }),
     defineField({
       name: "socialLinks",

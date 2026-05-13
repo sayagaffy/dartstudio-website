@@ -42,9 +42,7 @@ export const product = defineType({
     defineField({
       name: "heroImage",
       title: "Hero Image / Screenshot",
-      type: "image",
-      options: { hotspot: true },
-      fields: [{ name: "alt", type: "string", title: "Alt text" }],
+      type: "r2Image",
     }),
     defineField({
       name: "problemHeading",
@@ -78,9 +76,8 @@ export const product = defineType({
             { name: "body", type: "localizedRichText", title: "Body" },
             {
               name: "image",
-              type: "image",
+              type: "r2Image",
               title: "Image",
-              options: { hotspot: true },
             },
           ],
         },

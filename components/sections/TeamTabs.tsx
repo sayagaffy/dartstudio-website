@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { Image as SanityImage } from "sanity";
 import { SanityImage as Img } from "@/components/ui/SanityImage";
 import type { LocalizedField } from "@/lib/i18n/localize";
 import { localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
-import { urlForImage } from "@/sanity/lib/image";
+import type { R2Image } from "@/lib/types/r2Image";
 
 export type TeamPerson = {
   _id: string;
@@ -15,7 +14,7 @@ export type TeamPerson = {
   slug: { current: string };
   role: LocalizedField;
   bio: LocalizedField | null;
-  photo: SanityImage | null;
+  photo: R2Image;
 };
 
 type Props = {
@@ -36,10 +35,10 @@ function PersonCard({ person, locale }: { person: TeamPerson; locale: Locale }) 
         className="group block no-underline"
       >
         <div className="aspect-square overflow-hidden bg-[var(--color-bg-raised)]">
-          {person.photo?.asset ? (
+          {person.photo?.url ? (
             <Img
-              src={urlForImage(person.photo).width(600).height(600).url()}
-              alt={person.name}
+              src={person.photo.url}
+              alt={person.photo.alt ?? person.name}
               width={600}
               height={600}
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"

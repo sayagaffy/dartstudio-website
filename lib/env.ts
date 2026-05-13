@@ -32,6 +32,8 @@ const envSchema = z.object({
   R2_SECRET_ACCESS_KEY: opt(z.string().min(1)),
   R2_BUCKET_NAME: opt(z.string().min(1)),
   R2_PUBLIC_URL: opt(z.string().url()),
+  R2_UPLOAD_SECRET: opt(z.string().min(8)),
+  NEXT_PUBLIC_R2_UPLOAD_SECRET: opt(z.string().min(8)),
 
   // Resend (Phase 7)
   RESEND_API_KEY: opt(z.string().min(1)),

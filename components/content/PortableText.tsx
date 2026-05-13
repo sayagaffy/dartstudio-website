@@ -1,8 +1,6 @@
 import { PortableText as PortableTextBase, type PortableTextComponents } from "@portabletext/react";
 import Link from "next/link";
-import type { Image as SanityImage } from "sanity";
 import { SanityImage as Img } from "@/components/ui/SanityImage";
-import { urlForImage } from "@/sanity/lib/image";
 
 const components: PortableTextComponents = {
   block: {
@@ -75,17 +73,16 @@ const components: PortableTextComponents = {
     },
   },
   types: {
-    image: ({
+    r2Image: ({
       value,
     }: {
-      value: SanityImage & { alt?: string; caption?: { id: string; en: string } };
+      value: { url?: string; alt?: string; caption?: { id?: string; en?: string } };
     }) => {
-      if (!value?.asset) return null;
-      const url = urlForImage(value).width(1200).url();
+      if (!value?.url) return null;
       return (
         <figure className="my-8">
           <Img
-            src={url}
+            src={value.url}
             alt={value.alt ?? ""}
             width={1200}
             height={675}
@@ -98,6 +95,15 @@ const components: PortableTextComponents = {
           )}
         </figure>
       );
+    },
+    // Legacy handler — returns null for old Sanity CDN image data (no asset after migration)
+    image: ({
+      value,
+    }: {
+      value: { asset?: unknown; alt?: string; caption?: { id?: string; en?: string } };
+    }) => {
+      if (!value?.asset) return null;
+      return null;
     },
     codeBlock: ({ value }: { value: { code?: string; language?: string } }) => (
       <pre className="bg-[var(--color-bg-sunken)] border border-[var(--color-border)] rounded-[var(--radius-3)] p-5 overflow-x-auto my-6">

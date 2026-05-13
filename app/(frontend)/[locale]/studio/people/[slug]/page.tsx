@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import type { Image as SanityImage } from "sanity";
 import { PortableText } from "@/components/content/PortableText";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Schema } from "@/components/seo/Schema";
@@ -15,8 +14,8 @@ import type { Locale } from "@/lib/i18n/routing";
 import { Link } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema, buildPersonSchema } from "@/lib/seo/schema";
+import type { R2Image } from "@/lib/types/r2Image";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { urlForImage } from "@/sanity/lib/image";
 import { ALL_SLUGS_QUERY, PERSON_QUERY } from "@/sanity/lib/queries";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
@@ -35,7 +34,7 @@ type PersonDetail = {
   role: LocalizedField;
   bio: LocalizedField | null;
   trajectory: { id: unknown; en: unknown } | null;
-  photo: SanityImage | null;
+  photo: R2Image;
   socialLinks: SocialLinks | null;
   memberGroup?: "protagonist" | "circle";
   seo: { title: LocalizedField | null; description: LocalizedField | null } | null;
@@ -68,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `${person.name} di Dartstudio`,
     path: `/studio/people/${slug}`,
     locale,
-    ogImage: person.photo ? urlForImage(person.photo).width(1200).height(630).url() : undefined,
+    ogImage: person.photo?.url,
   });
 }
 
@@ -106,7 +105,7 @@ export default async function PersonPage({ params }: Props) {
     slug,
     role,
     bio: localize(person.bio, locale) ?? undefined,
-    image: person.photo ? urlForImage(person.photo).width(800).height(800).url() : undefined,
+    image: person.photo?.url,
     locale,
     socialLinks: {
       twitter: person.socialLinks?.twitter,
@@ -137,9 +136,9 @@ export default async function PersonPage({ params }: Props) {
           <div className="grid gap-12 md:grid-cols-[1fr_2fr] md:gap-20 items-start">
             {/* Photo */}
             <div className="aspect-square overflow-hidden bg-[var(--color-bg-raised)] max-w-sm">
-              {person.photo?.asset ? (
+              {person.photo?.url ? (
                 <Img
-                  src={urlForImage(person.photo).width(800).height(800).url()}
+                  src={person.photo.url}
                   alt={person.name}
                   width={800}
                   height={800}

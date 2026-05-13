@@ -1,4 +1,3 @@
-import type { Image as SanityImage } from "sanity";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
@@ -8,7 +7,6 @@ import { type TeamPerson, TeamTabs } from "./TeamTabs";
 
 type Person = TeamPerson & {
   memberGroup?: "protagonist" | "circle";
-  photo: SanityImage | null;
   role: LocalizedField;
   bio: LocalizedField | null;
 };

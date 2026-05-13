@@ -13,6 +13,7 @@ import { localizedRichText } from "./objects/localizedRichText";
 import { localizedString } from "./objects/localizedString";
 import { localizedText } from "./objects/localizedText";
 import { principle } from "./objects/principle";
+import { r2Image } from "./objects/r2Image";
 import { seoMetadata } from "./objects/seoMetadata";
 import { socialLinks } from "./objects/socialLinks";
 
@@ -20,6 +21,7 @@ import { socialLinks } from "./objects/socialLinks";
 import { siteSettings } from "./singletons/siteSettings";
 
 export const schemaTypes = [
+  r2Image,
   localizedString,
   localizedText,
   localizedRichText,

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import type { Image as SanityImage } from "sanity";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
 import { HowWeWork } from "@/components/sections/HowWeWork";
@@ -10,6 +9,7 @@ import { PrinciplesPreview } from "@/components/sections/PrinciplesPreview";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildMetadata } from "@/lib/seo/metadata";
+import type { R2Image } from "@/lib/types/r2Image";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PAGE_QUERY, PEOPLE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
@@ -32,7 +32,7 @@ type Person = {
   slug: { current: string };
   role: LocalizedField;
   bio: LocalizedField | null;
-  photo: SanityImage | null;
+  photo: R2Image;
   memberGroup?: "protagonist" | "circle";
 };
 

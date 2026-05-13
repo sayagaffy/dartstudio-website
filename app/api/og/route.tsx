@@ -1,16 +1,13 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 
-export const runtime = "edge";
+// Node.js runtime — no 1 MB Edge limit, fonts read from filesystem.
+export const runtime = "nodejs";
 
-// Load fonts at module top — fetched once per cold start, cached for warm.
-const charterBoldFont = fetch(new URL("./fonts/CharterBold.otf", import.meta.url)).then((res) =>
-  res.arrayBuffer(),
-);
-
-const interFont = fetch(new URL("./fonts/Inter-Regular.ttf", import.meta.url)).then((res) =>
-  res.arrayBuffer(),
-);
+const charterBoldFont = readFileSync(join(process.cwd(), "app/api/og/fonts/CharterBold.otf"));
+const interFont = readFileSync(join(process.cwd(), "app/api/og/fonts/Inter-Regular.ttf"));
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -20,7 +17,7 @@ export async function GET(req: NextRequest) {
   const category = searchParams.get("category")?.slice(0, 32);
   const locale = (searchParams.get("locale") ?? "id") as "id" | "en";
 
-  const [charterBold, inter] = await Promise.all([charterBoldFont, interFont]);
+  const [charterBold, inter] = [charterBoldFont, interFont];
 
   return new ImageResponse(
     <div

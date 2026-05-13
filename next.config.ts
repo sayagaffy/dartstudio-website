@@ -49,6 +49,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Ensure OG font files are included in the serverless function bundle
+  outputFileTracingIncludes: {
+    "/api/og": ["./app/api/og/fonts/**/*"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

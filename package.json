@@ -18,14 +18,22 @@
     ]
   },
   "dependencies": {
+    "@portabletext/react": "^6.2.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^5.25.0",
+    "groq": "^5.25.0",
     "next": "16.2.6",
     "next-intl": "^4.11.2",
+    "next-sanity": "^12.4.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "sanity": "^5.25.0",
+    "styled-components": "^6.4.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
+    "@sanity/types": "^5.25.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -1,11 +1,13 @@
 import type { JSX } from "react";
 import { cn } from "@/lib/utils";
 
-type Size = "read" | "page";
+type Size = "read" | "page" | "wide" | "default";
 
 const sizeMap: Record<Size, string> = {
   read: "max-w-[var(--container-read)]",
   page: "max-w-[var(--container-page)]",
+  wide: "max-w-[var(--container-page)]",
+  default: "max-w-[64rem]",
 };
 
 type Props = {

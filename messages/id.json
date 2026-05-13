@@ -13,6 +13,9 @@
     "closeMenu": "Tutup menu"
   },
   "home": {
-    "placeholder": "Selamat datang. Sedang dibangun."
+    "placeholder": "Selamat datang. Sedang dibangun.",
+    "productsViewAll": "Lihat semua produk kami",
+    "collaborateLearnMore": "Pelajari",
+    "journalViewAll": "Baca semua di Journal"
   }
 }

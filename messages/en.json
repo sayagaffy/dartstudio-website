@@ -13,6 +13,9 @@
     "closeMenu": "Close menu"
   },
   "home": {
-    "placeholder": "Welcome. Under construction."
+    "placeholder": "Welcome. Under construction.",
+    "productsViewAll": "View all products",
+    "collaborateLearnMore": "Learn more",
+    "journalViewAll": "Read more in Journal"
   }
 }

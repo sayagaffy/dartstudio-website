@@ -22,20 +22,24 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     localStorage.setItem("theme", theme);
   };
 
-  // Avoid hydration mismatch — render placeholder until mounted
   if (!mounted) {
-    return <span className={`inline-block w-6 h-4 ${className}`} aria-hidden="true" />;
+    return <span className={`inline-block w-10 h-5 ${className}`} aria-hidden="true" />;
   }
 
   return (
     <button
       type="button"
-      onClick={toggle}
+      role="switch"
+      aria-checked={isDark}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      title={isDark ? "Light mode" : "Dark mode"}
-      className={`font-mono text-xs uppercase tracking-[0.08em] text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors select-none ${className}`}
+      onClick={toggle}
+      className={`relative inline-flex h-5 w-10 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 ${isDark ? "bg-[var(--color-accent)]" : "bg-[var(--color-border-strong)]"} ${className}`}
     >
-      {isDark ? "☀" : "☾"}
+      {/* sliding knob */}
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-200 ${isDark ? "translate-x-5" : "translate-x-0"}`}
+      />
     </button>
   );
 }

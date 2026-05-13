@@ -113,7 +113,7 @@ export default async function HomePage({ params }: Props) {
       {credibilitySection && (
         <CredibilityBar
           heading={localize(credibilitySection.heading, locale) ?? ""}
-          body={typeof credibilitySection.body === "string" ? credibilitySection.body : ""}
+          body={localize(credibilitySection.body as LocalizedField<unknown[]>, locale) ?? []}
         />
       )}
 

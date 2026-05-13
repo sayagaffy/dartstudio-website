@@ -91,7 +91,7 @@ export default async function StudioPage({ params }: Props) {
             localize(originSection.heading, locale) ??
             (locale === "en" ? "How Dartstudio came to be." : "Bagaimana Dartstudio terbentuk.")
           }
-          body={originSection.body}
+          body={localize(originSection.body as LocalizedField<unknown[]>, locale) ?? []}
         />
       )}
 
@@ -129,7 +129,7 @@ export default async function StudioPage({ params }: Props) {
             localize(howWeWorkSection.heading, locale) ??
             (locale === "en" ? "How we work." : "Cara kami bekerja.")
           }
-          body={howWeWorkSection.body}
+          body={localize(howWeWorkSection.body as LocalizedField<unknown[]>, locale) ?? []}
         />
       )}
 

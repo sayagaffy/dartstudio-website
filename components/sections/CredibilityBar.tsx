@@ -1,7 +1,9 @@
+import { PortableText } from "@/components/content/PortableText";
 import { Container } from "@/components/ui/Container";
+import { Prose } from "@/components/ui/Prose";
 import { Section } from "@/components/ui/Section";
 
-type Props = { heading: string; body: string; industries?: string[] };
+type Props = { heading: string; body: unknown[]; industries?: string[] };
 
 export function CredibilityBar({ heading, body, industries }: Props) {
   return (
@@ -16,7 +18,9 @@ export function CredibilityBar({ heading, body, industries }: Props) {
             <h2 className="font-serif text-2xl text-[var(--color-fg)]">{heading}</h2>
           </div>
           <div className="md:col-span-2">
-            <p className="text-base leading-relaxed text-[var(--color-fg-muted)]">{body}</p>
+            <Prose>
+              <PortableText value={body ?? []} />
+            </Prose>
             {industries && industries.length > 0 && (
               <p className="mt-4 font-mono text-xs uppercase tracking-wider text-[var(--color-fg-muted)]">
                 {industries.join(" · ")}

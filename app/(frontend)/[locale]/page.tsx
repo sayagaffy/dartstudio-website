@@ -173,9 +173,10 @@ export default async function HomePage({ params }: Props) {
             : "Studio kecil. Standar yang tidak.")
         }
         body={
-          locale === "en"
+          localize(finalCtaSection?.body as LocalizedField<unknown[]>, locale) ??
+          (locale === "en"
             ? "If you want precision in every line of code and every architecture decision, we might have a lot to talk about."
-            : "Kalau Anda menginginkan presisi di setiap baris kode dan di setiap keputusan arsitektur, kita mungkin punya banyak hal untuk dibicarakan."
+            : "Kalau Anda menginginkan presisi di setiap baris kode dan di setiap keputusan arsitektur, kita mungkin punya banyak hal untuk dibicarakan.")
         }
         ctaLabel={locale === "en" ? "Start a Conversation" : "Mulai Percakapan"}
         ctaHref="/contact"

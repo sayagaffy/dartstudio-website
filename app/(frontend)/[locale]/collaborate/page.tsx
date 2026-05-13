@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
+import { TheProblem } from "@/components/sections/TheProblem";
 import { ThreeWaysToCollaborate } from "@/components/sections/ThreeWaysToCollaborate";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
@@ -21,6 +22,7 @@ type CollaborateModelCard = {
 type PageData = {
   heroHeading: LocalizedField | null;
   heroSubheading: LocalizedField | null;
+  sections: Array<{ sectionType: string; heading: LocalizedField | null; body: unknown }> | null;
   seo: { title: LocalizedField | null; description: LocalizedField | null } | null;
 } | null;
 
@@ -58,6 +60,10 @@ export default async function CollaboratePage({ params }: Props) {
     }),
   ]);
 
+  const sectionByType = (type: string) => pageData?.sections?.find((s) => s.sectionType === type);
+  const theProblemSection = sectionByType("the-problem");
+  const finalCtaSection = sectionByType("final-cta");
+
   return (
     <>
       <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Collaborate" }]} />
@@ -71,6 +77,18 @@ export default async function CollaboratePage({ params }: Props) {
         }
         subheading={localize(pageData?.heroSubheading, locale) ?? undefined}
       />
+
+      {theProblemSection && (
+        <TheProblem
+          heading={
+            localize(theProblemSection.heading, locale) ??
+            (locale === "en"
+              ? "The real cost of unmaintainable code."
+              : "Biaya sebenarnya dari kode yang tidak terpelihara.")
+          }
+          body={localize(theProblemSection.body as LocalizedField<unknown[]>, locale) ?? []}
+        />
+      )}
 
       <ThreeWaysToCollaborate
         heading={
@@ -89,11 +107,15 @@ export default async function CollaboratePage({ params }: Props) {
       />
 
       <FinalCTA
-        heading={locale === "en" ? "Already know what you need?" : "Sudah tahu yang Anda butuhkan?"}
+        heading={
+          localize(finalCtaSection?.heading, locale) ??
+          (locale === "en" ? "Already know what you need?" : "Sudah tahu yang Anda butuhkan?")
+        }
         body={
-          locale === "en"
+          localize(finalCtaSection?.body as LocalizedField<unknown[]>, locale) ??
+          (locale === "en"
             ? "Or if you prefer to talk directly, we're open to a 30-minute discovery call — free, no commitment."
-            : "Atau, kalau Anda lebih suka langsung bicara, kami terbuka untuk diskusi awal 30 menit — gratis, tanpa kewajiban."
+            : "Atau, kalau Anda lebih suka langsung bicara, kami terbuka untuk diskusi awal 30 menit — gratis, tanpa kewajiban.")
         }
         ctaLabel={locale === "en" ? "Start a Conversation" : "Mulai Percakapan"}
         ctaHref="/contact"

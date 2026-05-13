@@ -5,6 +5,8 @@ import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { FromTheJournal, type JournalCard } from "@/components/sections/FromTheJournal";
 import { Hero } from "@/components/sections/Hero";
+import { OriginStory } from "@/components/sections/OriginStory";
+import { TheProblem } from "@/components/sections/TheProblem";
 import { ThreeWaysToCollaborate } from "@/components/sections/ThreeWaysToCollaborate";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
@@ -87,6 +89,8 @@ export default async function HomePage({ params }: Props) {
 
   const sectionByType = (type: string) => homeData?.sections?.find((s) => s.sectionType === type);
   const credibilitySection = sectionByType("credibility-bar");
+  const originSection = sectionByType("origin");
+  const theProblemSection = sectionByType("the-problem");
   const threeWaysSection = sectionByType("three-ways");
   const journalSection = sectionByType("from-journal");
   const finalCtaSection = sectionByType("final-cta");
@@ -117,6 +121,28 @@ export default async function HomePage({ params }: Props) {
         />
       )}
 
+      {originSection && (
+        <OriginStory
+          heading={
+            localize(originSection.heading, locale) ??
+            (locale === "en" ? "Behind Dartstudio." : "Di Balik Dartstudio.")
+          }
+          body={localize(originSection.body as LocalizedField<unknown[]>, locale) ?? []}
+        />
+      )}
+
+      {theProblemSection && (
+        <TheProblem
+          heading={
+            localize(theProblemSection.heading, locale) ??
+            (locale === "en"
+              ? "The real cost of unmaintainable code."
+              : "Biaya sebenarnya dari kode yang tidak terpelihara.")
+          }
+          body={localize(theProblemSection.body as LocalizedField<unknown[]>, locale) ?? []}
+        />
+      )}
+
       <FeaturedProducts
         heading={
           locale === "en"
@@ -141,9 +167,10 @@ export default async function HomePage({ params }: Props) {
             : "Tiga cara kerja, kalau visinya cocok.")
         }
         intro={
-          locale === "en"
+          localize(threeWaysSection?.body as LocalizedField<unknown[]>, locale) ??
+          (locale === "en"
             ? "Since our main focus is our own products, we're selective about partners."
-            : "Karena fokus utama kami produk sendiri, kami pilih-pilih rekan."
+            : "Karena fokus utama kami produk sendiri, kami pilih-pilih rekan.")
         }
         models={models}
         learnMoreLabel={t("collaborateLearnMore")}

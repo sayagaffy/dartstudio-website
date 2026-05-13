@@ -1,5 +1,7 @@
+import { PortableText } from "@/components/content/PortableText";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
+import { Prose } from "@/components/ui/Prose";
 import { Section } from "@/components/ui/Section";
 import { type LocalizedField, localize } from "@/lib/i18n/localize";
 import type { Locale } from "@/lib/i18n/routing";
@@ -14,7 +16,7 @@ type Model = {
 
 type Props = {
   heading: string;
-  intro: string;
+  intro: string | unknown[];
   models: Model[];
   learnMoreLabel: string;
   locale: Locale;
@@ -29,7 +31,15 @@ export function ThreeWaysToCollaborate({ heading, intro, models, learnMoreLabel,
           <Heading level={2} size="display-md">
             {heading}
           </Heading>
-          <p className="mt-4 text-lg text-[var(--color-fg-muted)]">{intro}</p>
+          <div className="mt-4 text-lg text-[var(--color-fg-muted)]">
+            {Array.isArray(intro) ? (
+              <Prose>
+                <PortableText value={intro} />
+              </Prose>
+            ) : (
+              <p>{intro}</p>
+            )}
+          </div>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {models.map((model) => (

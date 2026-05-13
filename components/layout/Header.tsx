@@ -3,6 +3,7 @@ import { LocaleSwitcher } from "./LocaleSwitcher";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { Navigation } from "./Navigation";
+import { ThemeToggle } from "./ThemeToggle";
 
 export async function Header() {
   return (
@@ -12,6 +13,7 @@ export async function Header() {
           <Logo />
           <div className="flex items-center gap-6">
             <Navigation />
+            <ThemeToggle className="hidden md:inline-block" />
             <LocaleSwitcher className="hidden md:flex" />
             <MobileMenu />
           </div>

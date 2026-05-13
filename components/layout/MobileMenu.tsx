@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@/lib/i18n/routing";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -31,11 +32,13 @@ export function MobileMenu() {
 
       {open && (
         <div
-          className="fixed inset-0 z-50 bg-[var(--color-bg)] md:hidden flex flex-col"
+          className="fixed inset-0 z-[200] flex flex-col md:hidden"
+          style={{ backgroundColor: "var(--color-bg)" }}
           role="dialog"
           aria-modal="true"
         >
-          <div className="flex justify-end p-6">
+          <div className="flex items-center justify-between p-6">
+            <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen(false)}

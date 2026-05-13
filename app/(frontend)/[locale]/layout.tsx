@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ThemeScript } from "@/components/layout/ThemeScript";
 import { Schema } from "@/components/seo/Schema";
 import { routing } from "@/lib/i18n/routing";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/seo/schema";
@@ -33,6 +34,8 @@ export default async function LocaleLayout({ children, params }: Props) {
         {/* Favicon — black for light mode, white for dark mode */}
         <link rel="icon" href="/ds-black.ico" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/ds-white.ico" media="(prefers-color-scheme: dark)" />
+        {/* Apply saved theme before first paint to avoid flash */}
+        <ThemeScript />
         <link
           rel="preload"
           href="/fonts/charter/Charter-Bold.otf"

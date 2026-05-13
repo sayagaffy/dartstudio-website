@@ -50,6 +50,18 @@
       "trailingCommas": "all"
     }
   },
+  "overrides": [
+    {
+      "includes": ["components/layout/ThemeScript.tsx"],
+      "linter": {
+        "rules": {
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          }
+        }
+      }
+    }
+  ],
   "css": {
     "parser": {
       "tailwindDirectives": true

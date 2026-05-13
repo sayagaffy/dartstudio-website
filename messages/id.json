@@ -17,5 +17,107 @@
     "productsViewAll": "Lihat semua produk kami",
     "collaborateLearnMore": "Pelajari",
     "journalViewAll": "Baca semua di Journal"
+  },
+  "contact": {
+    "page": {
+      "title": "Mari ngobrol.",
+      "subtitle": "Tapi sebelumnya — biar lebih efisien:",
+      "preQualification": {
+        "heading": "Sebelum Anda menulis.",
+        "intro": "Beberapa hal yang bisa membantu mengarahkan inquiry Anda:",
+        "items": [
+          "Kalau Anda mencari quote untuk landing page sederhana atau project di bawah skala professional menengah — dengan hormat, kami bukan partner yang tepat.",
+          "Kalau Anda butuh \"developer untuk task spesifik\" — itu lebih masuk ke marketplace freelance.",
+          "Kalau Anda belum yakin model kolaborasi mana yang cocok — pilih \"Belum yakin\" di dropdown, ceritakan situasi Anda.",
+          "Kalau Anda sudah jelas tahu ingin diskusi engagement serius — lanjut ke form. Kami merespon dalam 2-3 hari kerja."
+        ]
+      },
+      "alternative": {
+        "heading": "Lebih suka langsung email?",
+        "body": "Kirim ke hello@dartstudio.id. Subjek email yang membantu: nama company + model kolaborasi yang dituju."
+      },
+      "responseTime": {
+        "heading": "Apa yang terjadi setelah Anda kirim.",
+        "items": [
+          { "label": "Hari 1-3", "body": "Kami baca inquiry Anda. Orang asli di Dartstudio yang baca, bukan auto-reply." },
+          { "label": "Hari 3-7", "body": "Kami balas — dengan calendar link, pertanyaan klarifikasi, atau penolakan jujur dengan alasan singkat." }
+        ]
+      }
+    },
+    "form": {
+      "fields": {
+        "name": { "label": "Nama lengkap" },
+        "email": {
+          "label": "Email",
+          "hint": "Kami balas via email yang sama. Tidak ada newsletter spam — kami tidak punya newsletter."
+        },
+        "company": { "label": "Nama company / project (opsional)" },
+        "collaborationModel": {
+          "label": "Tertarik untuk model kolaborasi mana?",
+          "options": {
+            "technology-partner": "Technology Partner — bangun produk dari nol",
+            "architecture-consultant": "Architecture Consultant — audit & refactor sistem existing",
+            "strategic-investor": "Strategic Investor — tech-for-equity partnership",
+            "not-sure": "Belum yakin — bantu saya cari yang cocok",
+            "open-discussion": "Diskusi terbuka — bukan engagement spesifik dulu",
+            "other": "Lainnya"
+          }
+        },
+        "message": {
+          "label": "Ceritakan singkat.",
+          "hint": "Tidak perlu polished. Konteks bisnis Anda, kondisi saat ini, dan apa yang Anda harapkan. Min. 50 karakter."
+        },
+        "budgetRange": {
+          "label": "Budget range yang ada di pikiran Anda (opsional)",
+          "hint": "Opsional, tapi kalau Anda isi, percakapan pertama bisa langsung lebih konkret.",
+          "placeholder": "Pilih range...",
+          "options": {
+            "under-100m": "< 100 juta IDR (kemungkinan tidak fit)",
+            "100m-300m": "100-300 juta IDR",
+            "300m-1b": "300 juta - 1 miliar IDR",
+            "1b-plus": "1 miliar+ IDR",
+            "not-sure": "Belum tahu — diskusi dulu",
+            "equity-based": "Equity-based (Strategic Investor)"
+          }
+        },
+        "startTimeline": {
+          "label": "Kapan Anda berharap mulai? (opsional)",
+          "placeholder": "Pilih timeline...",
+          "options": {
+            "asap": "Secepatnya / minggu ini",
+            "1-3-months": "1-3 bulan dari sekarang",
+            "3-6-months": "3-6 bulan dari sekarang",
+            "exploration": "Masih jauh / eksplorasi awal"
+          }
+        }
+      },
+      "submit": {
+        "idle": "Kirim Inquiry",
+        "loading": "Mengirim..."
+      },
+      "success": {
+        "label": "Terkirim",
+        "heading": "Inquiry Anda sudah kami terima.",
+        "body": "Orang asli di Dartstudio akan baca dalam 2-3 hari kerja. Email konfirmasi sudah dikirim ke alamat Anda."
+      },
+      "errors": {
+        "generic": "Ada error saat mengirim. Coba lagi, atau email langsung ke hello@dartstudio.id.",
+        "network": "Tidak bisa terhubung. Cek koneksi Anda dan coba lagi.",
+        "rateLimited": "Terlalu banyak pengiriman. Coba lagi dalam beberapa menit."
+      }
+    }
+  },
+  "waitlist": {
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email Anda",
+    "submit": "Notify Me",
+    "loading": "Memproses...",
+    "success": {
+      "label": "Terdaftar",
+      "body": "Anda di waitlist. Kami akan email saat ada update yang layak."
+    },
+    "errors": {
+      "generic": "Gagal. Coba lagi sebentar."
+    }
   }
 }

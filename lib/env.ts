@@ -29,6 +29,10 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().min(1).optional(),
   CONTACT_TO_EMAIL: z.string().email().default("hello@dartstudio.id"),
   CONTACT_FROM_EMAIL: z.string().email().default("noreply@dartstudio.id"),
+
+  // Upstash Redis — rate limiting (Phase 7)
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);

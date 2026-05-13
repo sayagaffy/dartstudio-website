@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import type { Image as SanityImage } from "sanity";
+import { WaitlistForm } from "@/components/forms/WaitlistForm";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { BehindTheBuild } from "@/components/sections/BehindTheBuild";
 import { FAQ, type FAQItem } from "@/components/sections/FAQ";
@@ -142,14 +143,26 @@ export default async function ProductDetailPage({ params }: Props) {
               {localize(product.tagline, locale)}
             </p>
           )}
-          {product.ctaButtons && product.ctaButtons.length > 0 && (
-            <div className="mt-10 flex flex-wrap gap-4">
-              {product.ctaButtons.map((cta) => (
-                <Button key={cta.href} href={cta.href} variant={cta.variant ?? "primary"} size="lg">
-                  {localize(cta.label, locale)}
-                </Button>
-              ))}
+          {product.status === "coming-soon" ? (
+            <div className="mt-10 max-w-md">
+              <WaitlistForm productSlug={slug} />
             </div>
+          ) : (
+            product.ctaButtons &&
+            product.ctaButtons.length > 0 && (
+              <div className="mt-10 flex flex-wrap gap-4">
+                {product.ctaButtons.map((cta) => (
+                  <Button
+                    key={cta.href}
+                    href={cta.href}
+                    variant={cta.variant ?? "primary"}
+                    size="lg"
+                  >
+                    {localize(cta.label, locale)}
+                  </Button>
+                ))}
+              </div>
+            )
           )}
         </Container>
       </Section>

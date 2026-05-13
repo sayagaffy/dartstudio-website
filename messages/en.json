@@ -1,0 +1,16 @@
+{
+  "common": {
+    "siteName": "Dartstudio",
+    "tagline": "Small studio. Standards that aren't."
+  },
+  "nav": {
+    "studio": "Studio",
+    "collaborate": "Collaborate",
+    "products": "Products",
+    "journal": "Journal",
+    "contact": "Start a Conversation"
+  },
+  "home": {
+    "placeholder": "Welcome. Under construction."
+  }
+}

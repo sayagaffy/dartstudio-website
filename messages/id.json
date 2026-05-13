@@ -1,0 +1,16 @@
+{
+  "common": {
+    "siteName": "Dartstudio",
+    "tagline": "Studio kecil. Sistem yang tidak."
+  },
+  "nav": {
+    "studio": "Studio",
+    "collaborate": "Collaborate",
+    "products": "Products",
+    "journal": "Journal",
+    "contact": "Mulai Percakapan"
+  },
+  "home": {
+    "placeholder": "Selamat datang. Sedang dibangun."
+  }
+}

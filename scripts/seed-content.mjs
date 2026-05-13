@@ -1,4 +1,5 @@
 // @ts-nocheck
+// biome-ignore-all lint/suspicious/noConsole: CLI script — console output is intentional
 /**
  * Seed script — pushes all approved copy from knowledge base into Sanity.
  * Run: node scripts/seed-content.mjs

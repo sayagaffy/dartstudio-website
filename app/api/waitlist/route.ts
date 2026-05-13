@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
 
   // Unique violation = already signed up — treat as success
   if (dbError && !dbError.message.includes("duplicate") && !dbError.code?.includes("23505")) {
+    // biome-ignore lint/suspicious/noConsole: server-side error logging
     console.error("[waitlist] supabase insert failed", dbError);
     return NextResponse.json({ ok: false, error: "server_error" }, { status: 500 });
   }

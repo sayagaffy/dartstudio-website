@@ -49,9 +49,6 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  experimental: {
-    typedRoutes: true,
-  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

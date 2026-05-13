@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (dbError) {
+    // biome-ignore lint/suspicious/noConsole: server-side error logging
     console.error("[contact] supabase insert failed", dbError);
     return NextResponse.json({ ok: false, error: "server_error" }, { status: 500 });
   }
@@ -94,6 +95,7 @@ export async function POST(req: NextRequest) {
   });
 
   if (notifyError) {
+    // biome-ignore lint/suspicious/noConsole: server-side error logging
     console.error("[contact] resend notify failed", notifyError);
   } else if (notifyResult?.id && row?.id) {
     await supabaseAdmin

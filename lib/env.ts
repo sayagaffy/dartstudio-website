@@ -41,6 +41,9 @@ const envSchema = z.object({
   // Upstash Redis — rate limiting (Phase 7)
   UPSTASH_REDIS_REST_URL: opt(z.string().url()),
   UPSTASH_REDIS_REST_TOKEN: opt(z.string().min(1)),
+
+  // IndexNow — search engine pinging (Phase 10)
+  INDEXNOW_KEY: opt(z.string().min(16)),
 });
 
 const parsed = envSchema.safeParse(process.env);

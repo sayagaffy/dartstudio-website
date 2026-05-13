@@ -59,7 +59,7 @@ export async function Footer() {
           <div className="pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="label-mono">{settings?.siteName ?? "Dartstudio"}</p>
             <p className="font-mono text-xs text-[var(--color-fg-muted)]">
-              {settings?.contactEmail ?? "hello@dartstudio.id"}
+              {settings?.contactEmail ?? "dartstudio.team@gmail.com"}
             </p>
             <div className="flex items-center gap-6">
               <Link

@@ -32,7 +32,7 @@ export function buildOrganizationSchema(): WithContext<Organization> {
         addressCountry: "ID",
       },
     },
-    email: "hello@dartstudio.id",
+    email: "dartstudio.team@gmail.com",
   };
 }
 
